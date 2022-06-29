@@ -1,0 +1,174 @@
+1.13.BETA_8 (31 Aug 2018)
+	Features:
+	- You can now update automatically the script using the .ahk version.
+	
+	Changes:
+	- The clipboard is no longer reverted after being used for sending a message in-game.
+	This change is due to an issue where some messages would send the wrong content.
+	This change also fixes a behaviour where, while using TradeMacro, if you had an item data in the clipboard before using a custom button, the TradeMacro item data tooltip would appear (due to TradeMacro noticing the clipboard change).
+	
+	Fixes:
+	- The StackClick hotkey wouldn't be able to function.
+	This hotkey allows to take just the right amount of currency when doing a currency.poe.trade by using Ctrl+Shift+Click.
+	- Stash Highlight: The tab name and the grid borders wouldn't be clickthrough.
+	- When launching a new instance without any special parameter, would be unable to close the previous script instance.
+	- Wouldn't be able to sort by clicking columns on the Stats GUI.
+	- Using the "Close other tabs with similar items" feature, tabs style wouldn't be reset.
+	This means that if a tab had the green or purple colour and was removed by the feature, any new tab with that ID would have appeared with the same colours scheme instead of the default one.
+
+
+= = = = = = = = = = = = =	
+1.13.BETA_7 (27 Aug 2018)
+	Fix: (.ahk only) The new "Show item location grid" function would throw errors when using the .ahk script on Unicode 64bits.
+		
+
+= = = = = = = = = = = = =	
+1.13.BETA_6 (24 Aug 2018)
+
+	PSA: If you are missing your settings after updating, please copy the following files from the Admin account's MyDocuments to your user account's MyDocuments
+	Folder : "\Documents\lemasato\POE Trades Companion" - Files: "Preferences.ini", "Trades_History.ini"
+	
+	Features:
+	- "Show item location grid" has been added as a new action for buttons/hotkeys.
+	This new feature allows to quickly find your item in your stash by highlighting its location on your screen.
+	Two white squares will appear. The bigger is for normal stash tabs, and the smaller one is for quad stash tabs.
+	It will also show the tab name the item is located in, so you don't have to look away.
+	The grid will automatically hide itself when the game window is not on focus.
+	- Any custom button that had the "Invite buyer to party" action has been updated with the new "Show item location grid" action.
+	- The small "trade" button has been updated to show the item grid as well.
+	- /InstanceName="" cmd line parameter.
+	This new parameter merges both /NewInstance and the old /PrefsFile paramter together.
+	It allows to run a second instance of the script, and keep your settings separate.
+	The settings file will be renamed based on the instance name chosen.
+	- Only receive PushBullet notifications while AFK.
+	This setting was already existing previously but wasn't implemented until now.
+	
+	Changes:
+	- Reloading the script now also restore the "Other" slot content.
+	- Added a button to preview your changes in the Setting skins
+	- Added a warning when trying to Price Verify unpriced items (not added yet).
+	
+	Fixes:
+	- After reloading as admin, the admin's MyDocuments folder would be used instead of the user who started the executable's MyDocuments.
+	If you are missing your settings after updating, please copy the following files from the Admin account's MyDocuments to your user account's MyDocuments
+	Folder : "\Documents\lemasato\POE Trades Companion" - Files: "Preferences.ini", "Trades_History.ini"
+	- Wouldn't be able to check prices for racing leagues.
+	- The league from trading whispers from event leagues would show as "Incursion" instead of the full race name (eg. Incursion Event (IRE001)).
+	- /GameFolder="" cmd line parameter not being detected.
+	- Pushbullet notifications wouldn't work normally.
+	- The script would slow down a bit upon receiving a trading whisper due to it always trying to send a PushBullet request.
+	- Items containing a number (such as gems and maps) would be detected as currency item when trying to verify their price.
+	- Clicking on a tab Other's slot would disable the "Purple" tab colour for all tabs of that buyer, instead of just that one tab.
+	- If a tab had a "purple" colour, it wouldn't be restored upon recreating the Trades GUI (such as after closing the Settings)
+	- The .ahk source would be unable to extract resources due to a change brought in 1.13.BETA_4/5
+	- Incorrect GUI height with no small/special buttons enabled.
+	
+
+= = = = = = = = = = = = =	
+1.13.BETA_4 && BETA_5 (22 Aug 2018)
+
+	1.13.BETA_5 Fix: Script not loading as admin automatically.
+	
+	Features:
+	- Price Verify now also works for currency whispers.
+	- You can now navigate through tabs with the following built-in hotkeys:
+	Ctrl + Tab / Ctrl + WheelDown: Next tab.
+	Ctrl + Shift + Tab / Ctrl + WheelUp: Previous tab.
+	Ctrl + 1-9: Choose tab ID 1-9.
+	
+	Fixes:
+	- Memory leak related to ImageButton.
+	- Smaller "special" trade buttons not working.
+	- Special keyboard combination for hotkeys not working (Example: Ctrl+Space)
+	- Typo that prevented from retrieveing currency data from currency.poe.trade
+	- /NoReplace or /NewInstance parameter wouldn't work correctly.
+	
+
+= = = = = = = = = = = = =	
+1.13.BETA_3 (18 Aug 2018)
+	Changes:
+	- Removed FontReg.exe and EnumFonts.vbs.
+	This change is to see if the executable still gets flagged without those.
+	
+	Fixes:
+	- An issue when assigning the game PID to a Trades tab.
+	- Settings "Download updates automatically" checkbox would not be set on Settings GUI creation.
+	The setting itself was still working as expected, only the checkbox state was being affected.
+	
+
+= = = = = = = = = = = = =	
+1.13.BETA_2 (17 Aug 2018)
+	Fixes:
+	- Trades GUI would only open upon closing settings.
+	- Settings would always open on launch.
+
+
+= = = = = = = = = = = = =	
+1.13.BETA_1 (16 Aug 2018)
+	In short:
+	- Complete rewrite of the tool.
+	- Major overhaul of the Settings menu.
+	- Verify an item price.
+	- PushBullet notifications.
+	
+	Features / Changes:
+		Trades menu:
+		- Added a GUI element to verify the trade's item price.
+		It is marked by a grey ring next to the time stamp.
+		
+		This new feature allows to easily spot those who changed the whisper's price.
+		For this feature to work, you need to set your account name in the Settings menu.
+		Clicking on it will retrieve this item's price on poe.trade and compare it with the local price.
+		
+		The colour of the ring will change based on the results:
+		Gray: Not verified yet.
+		Green: Found item on poe.trade, and both prices match.
+		Orange: Couldn't find the item on poe.trade.
+		Red: Found item on poe.trade, and the prices differ.
+		
+		
+		- PushBullet notifications can be received upon receiving a trading whisper / party message / whisper message.
+		It is also possible to only receive those notifications only when you are AFK.
+		
+		By using the PushBullet android app, this allows you to still be aware of your trading whispers while away from the computer.
+		
+		For this feature to work, you need to set your PushBullet token in the Settings menu.
+		You can create a PushBullet account here: https://www.pushbullet.com/
+		You can get your PushBullet token by clicking on "Create Access Token" here: https://www.pushbullet.com/#settings/account
+		
+		
+		- You can now lock the GUI in position by right clicking on the title bar and choosing "Lock Position"
+		- (Change) "Close similar" has been renamed into "Close other tabs with same item".
+		This option can be accessed by right clicking on a tab's "X" button.
+		
+			
+		Settings menu:
+		- Completely redone the GUI. User friendly.
+		- Added many new buttons/hotkeys actions.
+		- Added a new settings that allows to instantly send the whisper in-game by holding CTRL down when clicking on the "Copy" link from trading websites.
+		- (Change) You can now have 18 basic hotkeys, up from 8.
+		- (Change) You can now have an infinite amount of advanced hotkeys, up from 16.
+		- Added icons that link respectively to: GitHub / PoE Forums thread / My Reddit profile / My Discord channel / Paypal donations.
+		- (Change) Renamed many settings, to fit better.
+		- (Change) The "Customization > Appearance" tab has been renamed into "Skins"
+		- (Change)  The "Customization > Custom Buttons" and "Smaller Buttons" tabs have been merged into a single "Buttons" tab.
+		It is also now exponentially easier to set up your buttons!
+		- Added two new tabs: "Updating" and "About".
+		The former allows to set your updating settings, check for update manually, and see the changelogs.
+		The latter includes the Hall of Fame.
+
+		
+		Tray menu: 
+		- Added options to toggle on/off Clickthrough and Lock Position.
+		Clickthrough is a feature that already existed, but needed to be toggled from within the Settings menu.
+		Lock Position is a new feature, it allows to lock the Trades GUI in place.
+
+		
+		About? menu:
+		- Removed, merged within the Settings menu.
+		
+	Fixes:
+		Undocumented.
+		
+	
+= = = = = = = = = = = = =	
